@@ -8,6 +8,8 @@
 
 #import "NLKAuthorizationViewController.h"
 #import <Parus/Parus.h>
+#import "NLKNewTimeEntryViewController.h"
+#import "NLKTimeEntriesViewController.h"
 
 @interface NLKAuthorizationViewController () 
 
@@ -157,6 +159,14 @@
 
 - (void) userHasAuthenticated
 {
+    UITabBarController *tabBarController = [UITabBarController new];
+    {
+        tabBarController.viewControllers = @[[NLKTimeEntriesViewController new], [NLKNewTimeEntryViewController new]];
+
+        [self presentViewController:tabBarController animated:NO completion:^{
+            
+        }];
+    }
     
 }
 

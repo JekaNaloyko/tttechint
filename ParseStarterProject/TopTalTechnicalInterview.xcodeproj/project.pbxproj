@@ -26,6 +26,10 @@
 		C4C51B571613CE0800959FDC /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = C4C51B541613CE0800959FDC /* Default.png */; };
 		C4C51B581613CE0800959FDC /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4C51B551613CE0800959FDC /* Default-568h@2x.png */; };
 		C4C51B591613CE0800959FDC /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4C51B561613CE0800959FDC /* Default@2x.png */; };
+		C9438AFF191F7ECB00E53047 /* NLKNewTimeEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9438AFE191F7ECB00E53047 /* NLKNewTimeEntryViewController.m */; };
+		C9438B02191F7EE900E53047 /* NLKTimeEntriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9438B01191F7EE900E53047 /* NLKTimeEntriesViewController.m */; };
+		C9438B05191F80D300E53047 /* stopwatch.png in Resources */ = {isa = PBXBuildFile; fileRef = C9438B04191F80D300E53047 /* stopwatch.png */; };
+		C9438B07191F80E000E53047 /* text-list.png in Resources */ = {isa = PBXBuildFile; fileRef = C9438B06191F80E000E53047 /* text-list.png */; };
 		C9E5ED11191CC88F00173590 /* NLKAuthorizationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9E5ED10191CC88F00173590 /* NLKAuthorizationViewController.m */; };
 		C9E5ED72191CD0B400173590 /* NLKParseInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = C9E5ED71191CD0B400173590 /* NLKParseInteractor.m */; };
 		DD952FCB16E7F5CF00470144 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97E18B1E1624CB5700B17A67 /* CoreLocation.framework */; };
@@ -61,6 +65,12 @@
 		C4C51B541613CE0800959FDC /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		C4C51B551613CE0800959FDC /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		C4C51B561613CE0800959FDC /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		C9438AFD191F7ECB00E53047 /* NLKNewTimeEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLKNewTimeEntryViewController.h; sourceTree = "<group>"; };
+		C9438AFE191F7ECB00E53047 /* NLKNewTimeEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLKNewTimeEntryViewController.m; sourceTree = "<group>"; };
+		C9438B00191F7EE900E53047 /* NLKTimeEntriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLKTimeEntriesViewController.h; sourceTree = "<group>"; };
+		C9438B01191F7EE900E53047 /* NLKTimeEntriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLKTimeEntriesViewController.m; sourceTree = "<group>"; };
+		C9438B04191F80D300E53047 /* stopwatch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stopwatch.png; sourceTree = "<group>"; };
+		C9438B06191F80E000E53047 /* text-list.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "text-list.png"; sourceTree = "<group>"; };
 		C9E5ED0F191CC88F00173590 /* NLKAuthorizationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLKAuthorizationViewController.h; sourceTree = "<group>"; };
 		C9E5ED10191CC88F00173590 /* NLKAuthorizationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLKAuthorizationViewController.m; sourceTree = "<group>"; };
 		C9E5ED70191CD0B400173590 /* NLKParseInteractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLKParseInteractor.h; sourceTree = "<group>"; };
@@ -95,6 +105,7 @@
 		09ABC06213A1D52D009C3FCF = {
 			isa = PBXGroup;
 			children = (
+				C9438B03191F7FD400E53047 /* Resources */,
 				C9E5ED0E191CC83F00173590 /* Code */,
 				09ABC07713A1D52D009C3FCF /* ParseStarterProject */,
 				09ABC07013A1D52D009C3FCF /* Frameworks */,
@@ -160,12 +171,33 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		C9438AFC191F7E9800E53047 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				C9E5ED0F191CC88F00173590 /* NLKAuthorizationViewController.h */,
+				C9E5ED10191CC88F00173590 /* NLKAuthorizationViewController.m */,
+				C9438AFD191F7ECB00E53047 /* NLKNewTimeEntryViewController.h */,
+				C9438AFE191F7ECB00E53047 /* NLKNewTimeEntryViewController.m */,
+				C9438B00191F7EE900E53047 /* NLKTimeEntriesViewController.h */,
+				C9438B01191F7EE900E53047 /* NLKTimeEntriesViewController.m */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		C9438B03191F7FD400E53047 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				C9438B04191F80D300E53047 /* stopwatch.png */,
+				C9438B06191F80E000E53047 /* text-list.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		C9E5ED0E191CC83F00173590 /* Code */ = {
 			isa = PBXGroup;
 			children = (
+				C9438AFC191F7E9800E53047 /* ViewControllers */,
 				C9E5ED6F191CD06500173590 /* ParseInteractor */,
-				C9E5ED0F191CC88F00173590 /* NLKAuthorizationViewController.h */,
-				C9E5ED10191CC88F00173590 /* NLKAuthorizationViewController.m */,
 			);
 			path = Code;
 			sourceTree = "<group>";
@@ -237,6 +269,8 @@
 				C4C51B571613CE0800959FDC /* Default.png in Resources */,
 				C4C51B581613CE0800959FDC /* Default-568h@2x.png in Resources */,
 				C4C51B591613CE0800959FDC /* Default@2x.png in Resources */,
+				C9438B05191F80D300E53047 /* stopwatch.png in Resources */,
+				C9438B07191F80E000E53047 /* text-list.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,8 +315,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				C9E5ED72191CD0B400173590 /* NLKParseInteractor.m in Sources */,
+				C9438AFF191F7ECB00E53047 /* NLKNewTimeEntryViewController.m in Sources */,
 				C9E5ED11191CC88F00173590 /* NLKAuthorizationViewController.m in Sources */,
 				09ABC07F13A1D52D009C3FCF /* main.m in Sources */,
+				C9438B02191F7EE900E53047 /* NLKTimeEntriesViewController.m in Sources */,
 				09ABC08213A1D52D009C3FCF /* NLKAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
