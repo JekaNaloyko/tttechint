@@ -2,3 +2,4 @@ platform :ios, '6.0'
 
 pod 'Parus'
 pod 'Parse-iOS-SDK'
+pod 'PSLocationManager'

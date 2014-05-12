@@ -14,6 +14,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-MSWeakTimer.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-Parse-iOS-SDK.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -32,27 +37,32 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>1FAB3CA9F95A422AB0CC6800</key>
+		<key>26F07778CC7846DEA2CCB79B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3432FFCEC0D14819A9D34CCF</key>
+		<key>2A982036905344768B0F9B7E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>444C897310C449F185F32D08</key>
+		<key>4FD411C388054DF2AC8D8BF3</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4F8BE342D1F446538E7B12C4</key>
+		<key>6F25B83EB97A4FCB88BC930E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D91C283EC53B46C5BEAD4C02</key>
+		<key>B8B0558783684A4FA0A66F06</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E97CB287061B4548A88D4C1F</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E97CB287061B4548A88D4C1F"
-               BuildableName = "libPods-Parse-iOS-SDK.a"
-               BlueprintName = "Pods-Parse-iOS-SDK"
+               BlueprintIdentifier = "26F07778CC7846DEA2CCB79B"
+               BuildableName = "libPods-MSWeakTimer.a"
+               BlueprintName = "Pods-MSWeakTimer"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
