@@ -9,14 +9,17 @@
 #import "NLKNewTimeEntryViewController.h"
 #import <Parus/Parus.h>
 #import <MSWeakTimer/MSWeakTimer.h>
+#import "PSLocationManager.h"
 
-@interface NLKNewTimeEntryViewController ()
+@interface NLKNewTimeEntryViewController () <PSLocationManagerDelegate>
 
 @property (strong) UILabel *timeLabel;
 @property (strong) UILabel *distanceLabel;
+@property (strong) UILabel *strengthLabel;
 
 @property (strong) NSDate *startDate;
 @property (strong) NSTimer *timer;
+@property (strong) NSNumber *lastDistanceValue;
 
 @end
 
@@ -38,6 +41,8 @@
     [super viewDidLoad];
    
     [self buildView];
+    
+    [PSLocationManager sharedLocationManager].delegate = self;
 }
 
 - (void)buildView
@@ -88,14 +93,21 @@
         [self.view addSubview:distanceLabel];
     }
     
+    UILabel *strengthLabel = makeLabel(@"");
+    {
+        self.strengthLabel = strengthLabel;
+        [self.view addSubview:strengthLabel];
+    }
+    
     [self.view addConstraints:PVGroup(@[
                                         
                                         PVVFL(@"H:|-20-[startButton]-20-|"),
                                         PVVFL(@"H:|-20-[stopButton]-20-|"),
                                         PVVFL(@"H:|-20-[timeLabel]-20-|"),
-                                        PVVFL(@"H:|-20-[distanceLabel]"),
-                                        PVVFL(@"V:|-20-[startButton(40)]-5-[stopButton(40)]-20-[timeLabel(20)]-5-[distanceLabel(20)]")
-                                        ]).withViews(NSDictionaryOfVariableBindings(stopButton, startButton, timeLabel, distanceLabel)).asArray];
+                                        PVVFL(@"H:|-20-[distanceLabel]-20-|"),
+                                        PVVFL(@"H:|-20-[strengthLabel]-20-|"),
+                                        PVVFL(@"V:|-30-[startButton(40)]-5-[stopButton(40)]-20-[timeLabel(20)]-5-[distanceLabel(20)]-5-[strengthLabel(20)]")
+                                        ]).withViews(NSDictionaryOfVariableBindings(stopButton, startButton, timeLabel, distanceLabel, strengthLabel)).asArray];
 }
 
 - (void)didReceiveMemoryWarning
@@ -108,6 +120,8 @@
 {
     self.startDate = [NSDate date];
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(tick) userInfo:nil repeats:YES];
+    [[PSLocationManager sharedLocationManager] prepLocationUpdates];
+    [[PSLocationManager sharedLocationManager] startLocationUpdates];
 }
 
 - (void) stop
@@ -115,7 +129,6 @@
     self.startDate = nil;
     [self.timer invalidate];
     NSDate *stopDate = [NSDate date];
-    
 }
 
 - (void) tick
@@ -130,6 +143,34 @@
     NSInteger hours = totalSeconds / 3600;
     
     return [NSString stringWithFormat:@"%02d:%02d:%02d",hours, minutes, seconds];
+}
+
+#pragma mark PSLocationManagerDelegate
+
+- (void)locationManager:(PSLocationManager *)locationManager signalStrengthChanged:(PSLocationManagerGPSSignalStrength)signalStrength {
+    NSString *strengthText;
+    if (signalStrength == PSLocationManagerGPSSignalStrengthWeak) {
+        strengthText = NSLocalizedString(@"Signal: Weak", @"");
+    } else if (signalStrength == PSLocationManagerGPSSignalStrengthStrong) {
+        strengthText = NSLocalizedString(@"Signal: Strong", @"");
+    } else {
+        strengthText = NSLocalizedString(@"Signal: ...", @"");
+    }
+    
+    self.strengthLabel.text = strengthText;
+}
+
+- (void)locationManagerSignalConsistentlyWeak:(PSLocationManager *)locationManager {
+    self.strengthLabel.text = NSLocalizedString(@"Signal: Consistently Weak", @"");
+}
+
+- (void)locationManager:(PSLocationManager *)locationManager distanceUpdated:(CLLocationDistance)distance {
+    self.distanceLabel.text = [NSString stringWithFormat:@"Distance: %.2f %@", distance, NSLocalizedString(@"meters", @"")];
+    self.lastDistanceValue = @(distance);
+}
+
+- (void)locationManager:(PSLocationManager *)locationManager error:(NSError *)error {
+    self.strengthLabel.text = NSLocalizedString(@"Unable to determine location", @"");
 }
 
 @end

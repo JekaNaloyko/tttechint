@@ -11,7 +11,7 @@
 #import "NLKNewTimeEntryViewController.h"
 #import "NLKTimeEntriesViewController.h"
 
-@interface NLKAuthorizationViewController () 
+@interface NLKAuthorizationViewController ()  <UITextFieldDelegate>
 
 @property (strong) UITextField* usernameTextField;
 @property (strong) UITextField* emailTextField;
@@ -44,6 +44,7 @@
     UITextField*(^makeTextField)(NSNumber*, NSNumber*) = ^(NSNumber *keyboardType, NSNumber* secure) {
         UITextField *tf = [UITextField new];
         {
+            tf.delegate = self;
             tf.translatesAutoresizingMaskIntoConstraints  = NO;
             tf.keyboardType = keyboardType.integerValue;
             tf.backgroundColor = [UIColor whiteColor];
@@ -153,6 +154,12 @@
 - (void)logIn
 {
     [self.parseInteractor logInWithUsername:self.usernameTextField.text password:self.passwordTextField.text];
+}
+
+-(BOOL) textFieldShouldReturn:(UITextField *)textField{
+    
+    [textField resignFirstResponder];
+    return YES;
 }
 
 #pragma mark NLKAPIDelegate
