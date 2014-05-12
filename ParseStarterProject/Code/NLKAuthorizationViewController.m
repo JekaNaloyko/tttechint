@@ -25,7 +25,7 @@
 {
     self = [super init];
     if (self) {
-        self.view.backgroundColor = [UIColor lightGrayColor];
+        self.view.backgroundColor = [UIColor greenColor];
     }
     return self;
 }
@@ -38,9 +38,7 @@
 }
 
 - (void) buildView
-{
-    self.view.backgroundColor = [UIColor lightGrayColor];
-    
+{    
     UITextField*(^makeTextField)(NSNumber*, NSNumber*) = ^(NSNumber *keyboardType, NSNumber* secure) {
         UITextField *tf = [UITextField new];
         {
@@ -64,10 +62,11 @@
     };
     
     UIButton*(^makeButton)(NSString*) = ^(NSString* title) {
-        UIButton *button = [UIButton new];
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         {
             button.translatesAutoresizingMaskIntoConstraints = NO;
             button.backgroundColor = [UIColor grayColor];
+            [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             [button setTitle:title forState:UIControlStateNormal];
         }
         return button;

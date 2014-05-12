@@ -46,6 +46,7 @@
                                          [[[UIAlertView alloc] initWithTitle:@"Alert" message:errorString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil] show];
                                      }
                                  }];
+    
 }
 
 - (void)logOut

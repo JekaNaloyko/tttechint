@@ -10,11 +10,13 @@
 #import <Parus/Parus.h>
 #import <MSWeakTimer/MSWeakTimer.h>
 #import "PSLocationManager.h"
+#import <Parse/Parse.h>
 
 @interface NLKNewTimeEntryViewController () <PSLocationManagerDelegate>
 
 @property (strong) UILabel *timeLabel;
 @property (strong) UILabel *distanceLabel;
+@property (strong) UILabel *speedLabel;
 @property (strong) UILabel *strengthLabel;
 
 @property (strong) NSDate *startDate;
@@ -50,10 +52,11 @@
     self.view.backgroundColor = [UIColor greenColor];
     
     UIButton*(^makeButton)(NSString*) = ^(NSString* title) {
-        UIButton *button = [UIButton new];
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         {
             button.translatesAutoresizingMaskIntoConstraints = NO;
             button.backgroundColor = [UIColor grayColor];
+            [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             [button setTitle:title forState:UIControlStateNormal];
         }
         return button;
@@ -93,7 +96,13 @@
         [self.view addSubview:distanceLabel];
     }
     
-    UILabel *strengthLabel = makeLabel(@"");
+    UILabel *speedLabel = makeLabel(@"Speed: ");
+    {
+        self.speedLabel = speedLabel;
+        [self.view addSubview:speedLabel];
+    }
+    
+    UILabel *strengthLabel = makeLabel(@"Signal:");
     {
         self.strengthLabel = strengthLabel;
         [self.view addSubview:strengthLabel];
@@ -105,9 +114,10 @@
                                         PVVFL(@"H:|-20-[stopButton]-20-|"),
                                         PVVFL(@"H:|-20-[timeLabel]-20-|"),
                                         PVVFL(@"H:|-20-[distanceLabel]-20-|"),
+                                        PVVFL(@"H:|-20-[speedLabel]-20-|"),
                                         PVVFL(@"H:|-20-[strengthLabel]-20-|"),
-                                        PVVFL(@"V:|-30-[startButton(40)]-5-[stopButton(40)]-20-[timeLabel(20)]-5-[distanceLabel(20)]-5-[strengthLabel(20)]")
-                                        ]).withViews(NSDictionaryOfVariableBindings(stopButton, startButton, timeLabel, distanceLabel, strengthLabel)).asArray];
+                                        PVVFL(@"V:|-30-[startButton(40)]-5-[stopButton(40)]-20-[timeLabel(20)]-5-[distanceLabel(20)]-5-[speedLabel(20)]-5-[strengthLabel(20)]")
+                                        ]).withViews(NSDictionaryOfVariableBindings(stopButton, startButton, timeLabel, distanceLabel, speedLabel, strengthLabel)).asArray];
 }
 
 - (void)didReceiveMemoryWarning
@@ -120,20 +130,37 @@
 {
     self.startDate = [NSDate date];
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(tick) userInfo:nil repeats:YES];
+    [[PSLocationManager sharedLocationManager] resetLocationUpdates];
     [[PSLocationManager sharedLocationManager] prepLocationUpdates];
     [[PSLocationManager sharedLocationManager] startLocationUpdates];
 }
 
 - (void) stop
 {
+    PFObject *timeUnit = [PFObject objectWithClassName:[NSString stringWithFormat:@"TimeUnit%@", [PFUser currentUser].username]];
+    timeUnit[@"stopTime"] = [NSDate date];
+    timeUnit[@"time"] = @([[NSDate date] timeIntervalSinceDate:self.startDate]);
+    timeUnit[@"distance"] = self.lastDistanceValue;
+    [timeUnit saveInBackground];
+    
+    [[PSLocationManager sharedLocationManager] stopLocationUpdates];
+
     self.startDate = nil;
     [self.timer invalidate];
-    NSDate *stopDate = [NSDate date];
 }
 
 - (void) tick
 {
     self.timeLabel.text = [NSString stringWithFormat:@"Time: %@", [self timeFormatted:[[NSDate date] timeIntervalSinceDate:self.startDate]]];
+    
+    double speed = [[PSLocationManager sharedLocationManager] currentSpeed];
+    if (speed > 0) {
+        self.speedLabel.text = [NSString stringWithFormat:@"Speed: %.2f m/s", speed];
+    }
+    else
+    {
+       self.speedLabel.text = @"Speed:";
+    }
 }
 
 - (NSString *)timeFormatted:(NSInteger)totalSeconds{
