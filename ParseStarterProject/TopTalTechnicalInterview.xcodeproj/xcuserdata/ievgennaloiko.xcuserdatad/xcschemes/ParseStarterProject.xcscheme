@@ -28,6 +28,16 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "C91D673F1920C9F5005B023D"
+               BuildableName = "TopTalTechnicalInterview Tests.xctest"
+               BlueprintName = "TopTalTechnicalInterview Tests"
+               ReferencedContainer = "container:TopTalTechnicalInterview.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
